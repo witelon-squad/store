@@ -17,15 +17,15 @@ $ cd store
 ```bash
 $ docker-compose up -d
 ```
-5. Instalujesz zależności w projekcie za pomocą composera:
+4. Instalujesz zależności w projekcie za pomocą composera:
 ```bash
 $ docker exec app composer install
 ```
-6. Generujesz w artisanie key dla laravela
+5. Generujesz w artisanie key dla Laravela
 ```bash
 $ docker-compose exec app php artisan key:generate
 ```
-Środowisko testowe będzie dostępne pod tym adresem na localhoscie: [localhost](http://localhost:8080), na porcie 8080
+Środowisko testowe będzie dostępne pod tym adresem, na localhoscie: [localhost](http://localhost:8080), na porcie 8080
 
 ### Jeżeli przy budowaniu wystąpią przykładowe błędy, skorzystajcie z instrukcji poniżej:
 #### Błąd timeout

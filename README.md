@@ -4,7 +4,7 @@
 
 [Instrukcja dla linuxa](https://docs.docker.com/compose/install/)
 
-#### Jeżeli wszystko zainstalowałeś  przejdzi do instrukcji niżej:
+#### Jeżeli wszystko zainstalowałeś  przejdzi do instrukcji poniżej:
 1. Clone a repository:
 ```bash
 $ git clone https://strafe:mygithubpassword@github.com/witelon-squad/store

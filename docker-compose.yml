@@ -1,0 +1,69 @@
+version: '3.7'
+services:
+  # PHP-FPM - Service
+  app:
+    build:
+      context: .
+      dockerfile: ./.docker/php/Dockerfile
+    container_name: app
+    restart: unless-stopped
+    tty: true
+    working_dir: /var/www
+    volumes:
+      - ./www:/var/www
+      - ./.docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+
+    networks:
+      - app-network
+
+  # NGINX - Service
+  server:
+    image: nginx:1.19.4-alpine
+    container_name: server
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "8080:80"
+      - "8143:443"
+    volumes:
+      - ./www:/var/www
+      - ./.docker/nginx/conf.d/:/etc/nginx/conf.d/
+    networks:
+      - app-network
+
+  # MySQL - Service
+  db:
+    image: mysql:8.0.22
+    container_name: db
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: laraveldb
+      MYSQL_USER: laravel
+      MYSQL_PASSWORD: laravelpassworddb
+      MYSQL_ROOT_PASSWORD: rootpasswordmysql
+    volumes:
+      - ./databases:/var/lib/mysql/
+    networks:
+      - app-network
+
+  # REDIS - Service
+  redis:
+    image: redis:6.0.9-alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - app-network
+
+# Volumes
+volumes:
+  mysqldata:
+    driver: local
+
+# Networks
+networks:
+  app-network:
+    driver: bridge

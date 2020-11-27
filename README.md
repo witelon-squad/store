@@ -11,7 +11,7 @@ $ git clone https://strafe:mygithubpassword@github.com/witelon-squad/store
 ```
 2. Przechodzimy do folderu z klonowanego repozytorium 
 ```bash
-$ cd docker-setup-laravel
+$ cd store
 ```
 3. Budujemy obraz naszego środowiska testowego
 ```bash

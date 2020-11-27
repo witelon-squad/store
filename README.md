@@ -1,4 +1,4 @@
-# Sklep
+# Manual
 ## Jak postawić środowisko testowe na dockerze ?
 [Instrukcja dla windowsa](https://docs.docker.com/docker-for-windows/)
 

@@ -17,11 +17,11 @@ $ cd store
 ```bash
 $ docker-compose up -d
 ```
-4. Potem instalujesz zależności w projekcie za pomocą composera:
+4. Potem instalujesz zależności w projekcie za pomocą Composera:
 ```bash
 $ docker exec app composer install
 ```
-5. Oraz generujesz w artisanie key dla Laravela:
+5. Oraz generujesz w Artisanie key dla Laravela:
 ```bash
 $ docker-compose exec app php artisan key:generate
 ```

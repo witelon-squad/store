@@ -39,3 +39,4 @@ $ export DOCKER_CLIENT_TIMEOUT=120
 - Baza danych znajduje się w katalogu: <b>databases</b>,
 - Nie zalecam edytować bazy danych z plików na żywca, kiedy docker jes włączony, ponieważ może się wysypać,
 - Jeżeli macie problem z kodem, zróbcie osobnego brancha i w comit opiszcie dokładnie problem. W wolnej chwili przejrzę kod i zmerguje z główną gałęzią, która za pomocą githube actions będzie deployowana na bierząco, na serwer główny, który znajduje się pod adresem: [serwer produkcyjny](http://95.111.242.110:8080/). 
+- <b>[Link do trello z podziałem obowiązków](https://trello.com/invite/b/doovPsOY/9968c55ee89b9bb077f394cbca794503/portfolio-project)</b>

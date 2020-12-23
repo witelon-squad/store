@@ -26,7 +26,10 @@ $ docker exec app composer install
 $ docker-compose exec app php artisan key:generate
 ```
 Środowisko testowe będzie dostępne pod tym adresem, na localhoscie: [localhost](http://localhost:8080), na porcie 8080.
-
+### Usługi:
+- www port: :8080
+- SFTP port : :2249
+- phpmyadmin port : 8081
 ### Jeżeli przy budowaniu wystąpią przykładowe błędy, skorzystajcie z instrukcji poniżej:
 #### Błąd timeout:
 ```bash

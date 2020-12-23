@@ -14,6 +14,7 @@ RUN apt-get update && apt-get install -y \
         curl \
         unzip \
         libpq-dev \
+        ssh \
     && docker-php-ext-configure gd \
     && docker-php-ext-install -j$(nproc) gd \
     && docker-php-ext-install zip \
@@ -26,5 +27,19 @@ RUN apt-get update && apt-get install -y \
     # && docker-php-ext-install pdo_pgsql \
     && docker-php-source delete
 
+
+#ssh login root/root
+ARG USER=root
+ARG PASSWORD=root
+
+
+RUN sed -i s/#PermitRootLogin.*/PermitRootLogin\ yes/ /etc/ssh/sshd_config \
+    && echo "${USER}:${PASSWORD}" | chpasswd \
+    && ssh-keygen -A 
+
+RUN service ssh start
+
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 RUN chown -R www-data:www-data /var/www
+
+

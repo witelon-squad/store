@@ -27,6 +27,19 @@ RUN apt-get update && apt-get install -y \
     # && docker-php-ext-install pdo_pgsql \
     && docker-php-source delete
 
+# Install nodejs
+RUN curl -sL https://deb.nodesource.com/setup_15.x -o nodesource_setup.sh && bash nodesource_setup.sh && apt-get -y --force-yes install nodejs
+
+# Cleaning
+RUN apt-get clean && apt-get autoremove -y
+
+# Upgrading Node
+RUN npm cache clean -f
+RUN npm install -g n
+RUN n stable
+
+# Adding npm-cache
+RUN npm install -g npm-cache
 
 #ssh login root/root
 ARG USER=root
@@ -37,9 +50,7 @@ RUN sed -i s/#PermitRootLogin.*/PermitRootLogin\ yes/ /etc/ssh/sshd_config \
     && echo "${USER}:${PASSWORD}" | chpasswd \
     && ssh-keygen -A 
 
-ENTRYPOINT service ssh restart && bash
+RUN service ssh restart && bash
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 RUN chown -R www-data:www-data /var/www
-
-

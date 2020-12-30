@@ -36,6 +36,19 @@ $ docker-compose exec app php artisan key:generate
 $ export COMPOSE_HTTP_TIMEOUT=120
 $ export DOCKER_CLIENT_TIMEOUT=120
 ```
+#### Nie można połączyć się z kontenerem laravela poprzez ssh:
+1. Szukamy kontener z laravelem i kopiujemy id jego
+```bash
+$ docker ps
+```
+2. Wchodzimy do shella kontenera 
+```bash
+$ docker exec -it <container id> /bin/bash
+```
+3.Restartujemy usługe ssh
+```bash
+$ service ssh restart && bash
+```
 
 ### Dodatkowe informacje:
 - Laravel znajduje się w katalogu: <b>www</b> i z niego jest hostowany,

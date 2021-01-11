@@ -14,7 +14,7 @@
     @endif
 
     <div class="pull-left">
-        <h2>Edycja roli</h2>
+        <h2 class='mb-3'>Edycja roli</h2>
     </div>
     {!! Form::model($role, ['method' => 'PATCH','route' => ['roles.update', $role->id]]) !!}
     <div class="form-group">

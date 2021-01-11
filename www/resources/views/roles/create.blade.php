@@ -3,7 +3,7 @@
 
 @section('content-menu')
     <div class="pull-left">
-        <h2>Utwórz nowy rodzaj konta</h2>
+        <h2 class='mb-3'>Utwórz nowy rodzaj konta</h2>
     </div>
     @if (count($errors) > 0)
         <div class="alert alert-danger">

@@ -38,7 +38,7 @@
                 <div class="row">
                     <h2>Polecane</h2>
                     <div class="main-crousel">
-                        <a href="{{ route('product') }}" class="main_carousel_link">
+                        <a href="" class="main_carousel_link">
                             <div><img src="{{ asset('/img/Acer-Swift-1-5.jpg') }}" class="img-fluid">
                                 <div class="name">laptop Acer-Swift-1-5</div>
                                 <div class="price">5999zł</div>

@@ -4,11 +4,11 @@
 @section('menu')
 @endsection
 @yield('nav-bar')
-    <main>
+    <main style="margin-top: 170px">
         <section class="main_section">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <ul class="profile_nav">
                             <li><a href="{{ route('products.index') }}">Ustawienia sklepu</a></li>
                             <li><a href="{{ route('users.index') }}">Użytkownicy</a></li>
@@ -17,7 +17,7 @@
                             <li><a href="{{ route('products.index') }}">Dodatkowe treści</a></li>
                         </ul>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-9">
                         @yield('content-menu')
                     </div>
                 </div>

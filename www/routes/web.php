@@ -7,9 +7,12 @@ use App\Http\Controllers\User\emailVerify;
 use App\Http\Controllers\User\UserDataChange;
 
 use App\Http\Controllers\Product\ProductController;
+use App\Http\Controllers\Product\WarehouseController;
 use App\Http\Controllers\Role\RoleController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Shop\ShopController;
+use App\Http\Controllers\Shop\CartController;
 
 
 /*
@@ -42,17 +45,17 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/admin/panel/roles', RoleController::class);
     Route::resource('/admin/panel/users', UserController::class);
     Route::resource('/admin/panel/products', ProductController::class);
+    Route::get('/admin/panel/warehouse/sync', [WarehouseController::class,'SyncStorage'])->name('sync');
+    Route::get('/shop/account', [HomeController::class, 'index'])->name('home');
+    Route::get('/shop/orderList', function () {
+        return view('user.orders');
+    })->name('orders');
+    Route::post('/shop/account/change', [UserDataChange::class, 'CheckData'])->name('DataChange');
+
 });
 
 Route::middleware(['verified'])->group(function () {
     /**********User*******/
-    Route::get('/shop/account', [HomeController::class, 'index'])->name('home');
-
-    Route::get('/shop/orderList', function () {
-        return view('layout.user.orders');
-    })->name('orders');
-
-    Route::post('/shop/account/change', [UserDataChange::class, 'CheckData'])->name('DataChange');
 
 
 });
@@ -63,32 +66,30 @@ Route::get('/shop/account/resetPass', function () {
 Route::get('/', function () {
     return view('index');
 })->name('index');
-Route::get('/shop/product', function () {
-    return view('layout.shop.product');
-})->name('product');
+Route::get('/shop/products',[ShopController::class,'show'])->name('products');
+/********Cart*********/
+Route::get('/shop/cart', [CartController::class,'cart'])->name('cart');
 
-Route::get('/shop/cart', function () {
-    return view('layout.shop.cart');
-})->name('cart');
+Route::get('/shop/products/{id}', [CartController::class,'addToCart']);
 
-Route::get('/shop/products', function () {
-    return view('layout.shop.products');
-})->name('products');
+Route::patch('/shop/cart/update-cart', [CartController::class,'update']);
+
+Route::delete('/shop/cart/remove-from-cart', [CartController::class,'remove']);
 /******index*************/
 Route::get('/info/payment', function () {
-    return view('layout.shop.payment');
+    return view('shop.payment');
 })->name('payment');
 
 Route::get('/info/policy', function () {
-    return view('layout.shop.policy');
+    return view('shop.policy');
 })->name('policy');
 
 Route::get('/info/shipping', function () {
-    return view('layout.shop.shipping');
+    return view('shop.shipping');
 })->name('InfoShipping');
 
 Route::get('/info/about', function () {
-    return view('layout.shop.about');
+    return view('shop.about');
 })->name('about');
 
 

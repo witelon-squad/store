@@ -22,7 +22,7 @@
 <body>
 @yield('menu')
 <header>
-    <nav class="navbar fixed-top  navbar-expand navbar-light bg-white d-block pb-0">
+    <nav class="navbar fixed-top navbar-expand navbar-light bg-white d-block pb-0">
         <div class="container">
             <a class="navbar-brand" href="{{ route('index') }}"><img src="{{ asset('img/logo.png') }}"
                                                                      style="width: 160px;"></a>
@@ -46,7 +46,7 @@
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                     <li><a class="dropdown-item" href="{{ route('home') }}">Dane konta</a></li>
                                     @hasanyrole('admin')
-                                    <li><a class="dropdown-item" href="">Admin panel</a></li>
+                                    <li><a class="dropdown-item" href="{{route('products.index') }}">Admin panel</a></li>
                                     @endhasallroles
                                     <li><a class="dropdown-item" href="{{ route('logout') }}"
                                            onclick="event.preventDefault();

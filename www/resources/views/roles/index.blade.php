@@ -2,7 +2,7 @@
 
 
 @section('content-menu')
-    <h2>Uprawnienia</h2>
+    <h2 style="margin-bottom: 5px">Uprawnienia</h2>
         <div class="pull-right">
         @can('role-create')
             <a class="btn btn-success" href="{{ route('roles.create') }}">Utwórz nowe uprawnienia</a>
@@ -13,10 +13,10 @@
         <p>{{ $message }}</p>
     </div>
 @endif
-<table class="table table-bordered">
+<table class="table table-bordered mt-3">
   <tr>
      <th>Lp.</th>
-     <th>Nick</th>
+     <th>Nazwa</th>
      <th width="280px">Akcja</th>
   </tr>
     @foreach ($roles as $key => $role)

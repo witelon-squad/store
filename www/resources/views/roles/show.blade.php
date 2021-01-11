@@ -2,7 +2,7 @@
 
 
 @section('content-menu')
-    <h2>Pokaż uprawnienie</h2>
+    <h2 class='mb-3'>Pokaż uprawnienie</h2>
         <div class="form-group">
             <strong>Nazwa:</strong>
             {{ $role->name }}

@@ -1,10 +1,10 @@
 
 @extends('admin.index')
 @section('nav-bar')
+@section('content-menu')
+<div>
             <div class="pull-left">
-                <h2>Edycja Produktu</h2>
-            </div>
-            <div class="pull-right">
+                <h2 class="mb-1">Edycja Produktu</h2>
                 <a class="btn btn-primary" href="{{ route('products.index') }}">Wstecz</a>
             </div>
 
@@ -39,10 +39,14 @@
 		            <strong>Detail:</strong>
 		            <textarea class="form-control" style="height:150px" name="detail" placeholder="Detail">{{ $product->detail }}</textarea>
 		        </div>
-		    </div>
-		      <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            <div class="form-group d-grid mt-1">
+              <button type="submit" class="btn btn-success">Submit</button>
+
+            </div>
 		</div>
 
 
     </form>
+</div>
 @endsection

@@ -42,7 +42,7 @@ class HomeController extends Controller
         else
         {
             $data = $this->getDataUser();
-            return view('layout.user.user',['data' =>$data]);
+            return view('user.user',['data' =>$data]);
         }
 
     }

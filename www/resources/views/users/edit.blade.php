@@ -3,7 +3,7 @@
 
 @section('content-menu')
     <div class="pull-left">
-        <h2>Edycja użytkownika</h2>
+        <h2 class="mb-3">Edycja użytkownika</h2>
     </div>
 
 
@@ -49,9 +49,9 @@
     </div>
 
     <br/>
-    <div class="pull-right">
-        <a class="btn btn-primary" href="{{ route('users.index') }}"> Wstecz</a>
-        <button type="submit" class="btn btn-primary">Zapisz</button>
+    <div class="form-group d-flex justify-content-around mt-3">
+        <a class="btn btn-primary w-25" href="{{ route('users.index') }}"> Wstecz</a>
+        <button type="submit" class="btn btn-success w-25">Zapisz</button>
     </div>
     {!! Form::close() !!}
 

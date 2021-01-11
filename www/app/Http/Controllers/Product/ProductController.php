@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Product;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use  App\Http\Controllers\Controller;
 
 class ProductController extends Controller
 {
@@ -27,9 +27,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::latest()->paginate(5);
+        $products = Product::latest()->paginate(30);
         return view('products.index',compact('products'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+            ->with('i', (request()->input('page', 1) - 1) * 30);
     }
 
     /**
@@ -58,7 +58,7 @@ class ProductController extends Controller
         Product::create($request->all());
 
         return redirect()->route('products.index')
-            ->with('success','Udało się stworzyć produkt');
+            ->with('success','Produkt został stworzony');
     }
 
     /**
@@ -100,7 +100,7 @@ class ProductController extends Controller
         $product->update($request->all());
 
         return redirect()->route('products.index')
-            ->with('success','Zapisano');
+            ->with('success','Produkt został zaktualizowany');
     }
 
     /**

@@ -47,7 +47,7 @@
                                     </div>
                                         <div class="col-md-6 mb-3">
                                         <label for="change_password" class="form-label">Hasło</label>
-                                        <input type="password" class="form-control" id="change_password" name="_pass" value="{{$data['pass']}}">
+                                        <input type="password" class="form-control" id="change_password" name="_pass">
                                     </div>
                                     <div class="text-right mt-5 d-flex">
                                     <button type="submit" class="btn btn-main">Zapisz zmiany</button>

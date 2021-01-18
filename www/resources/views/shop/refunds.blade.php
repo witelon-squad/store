@@ -7,12 +7,10 @@
 
     <main>
         <div class="container">
-          <section class="main_section text_section">
-              @foreach($content as $data)
-                  {!!$data->content!!}
-              @endforeach
-
-            </section>
+            <section class="main_section text_section">
+            @foreach($content as $data)
+                {!!$data->content!!}
+            @endforeach
         </div>
     </main>
 @section('footer')

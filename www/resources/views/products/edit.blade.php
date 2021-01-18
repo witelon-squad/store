@@ -22,7 +22,7 @@
     @endif
 
 
-    <form action="{{ route('products.update',$product->id) }}" method="POST">
+    <form action="{{ route('products.update',$product->id) }}">
     	@csrf
         @method('PUT')
 
@@ -30,18 +30,30 @@
          <div class="row">
 		    <div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
-		            <strong>Name:</strong>
-		            <input type="text" name="name" value="{{ $product->name }}" class="form-control" placeholder="Name">
+		            <strong>Nazwa produktu:</strong>
+		            <input type="text" name="name" value="{{ $product->name }}" class="form-control" placeholder="Nazwa produktu">
 		        </div>
 		    </div>
+             <div class="col-xs-12 col-sm-12 col-md-12">
+                 <div class="form-group">
+                     <strong>Cena (zł):</strong>
+                     <input type="text" name="price" value="{{ $product->price }}" class="form-control" placeholder="Cena">
+                 </div>
+             </div>
+             <div class="col-xs-12 col-sm-12 col-md-12">
+                 <div class="form-group">
+                     <strong>Zdjęcie</strong>
+                     <input type="file" name="image" value="{{ $product->image }}" class="form-control" placeholder="Zdj">
+                 </div>
+             </div>
 		    <div class="col-xs-12 col-sm-12 col-md-12">
-		        <div class="form-group">
-		            <strong>Detail:</strong>
-		            <textarea class="form-control" style="height:150px" name="detail" placeholder="Detail">{{ $product->detail }}</textarea>
+                <strong>Opis:</strong>
+		        <div class="form-group" id="editor">
+		            <textarea class="form-control" style="height:150px" name="description" placeholder="Opis">{{ $product->description }}</textarea>
 		        </div>
             </div>
             <div class="form-group d-grid mt-1">
-              <button type="submit" class="btn btn-success">Submit</button>
+              <button type="submit" class="btn btn-success">Zapisz</button>
 
             </div>
 		</div>
@@ -49,4 +61,13 @@
 
     </form>
 </div>
+<script src="https://cdn.ckeditor.com/ckeditor5/24.0.0/classic/ckeditor.js"></script>
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#editor' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
 @endsection
+

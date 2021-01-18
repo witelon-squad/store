@@ -10,8 +10,6 @@
                             <div class="alert alert-success" role="alert">
                                 <h3>Twój email został już zweryfikowany</h3>
                             </div>
-
-
                         </div>
                     </div>
                 </div>

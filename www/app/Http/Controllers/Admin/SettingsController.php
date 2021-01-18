@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Role;
 
-class AdminController extends Controller
+class SettingsController extends Controller
 {
     function __construct()
     {
@@ -15,8 +15,8 @@ class AdminController extends Controller
         $this->middleware('permission:product-edit', ['only' => ['edit','update']]);
         $this->middleware('permission:product-delete', ['only' => ['destroy']]);
     }
-    public function index()
+    public function index(Request $request)
     {
-        return view('admin.index');
+        return view('settings_shop.index');
     }
 }

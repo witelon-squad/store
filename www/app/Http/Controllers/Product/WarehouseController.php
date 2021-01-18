@@ -17,11 +17,12 @@ class WarehouseController extends Controller
 {
     function __construct()
     {
-        $this->middleware('permission:product-list|product-create|product-edit|product-delete', ['only' => ['index','show']]);
-        $this->middleware('permission:product-create', ['only' => ['create','store']]);
-        $this->middleware('permission:product-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:product-list|product-create|product-edit|product-delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:product-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:product-edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:product-delete', ['only' => ['destroy']]);
     }
+
     protected function GetRensponseEndpoint()
     {
         $warehouse = env('IP_WAREHOUSE', '');
@@ -41,7 +42,6 @@ class WarehouseController extends Controller
         foreach ($json_results as $array) {
             $list_key = array_keys($array);
             break;
-
         }
         return $list_key;
     }
@@ -134,7 +134,7 @@ class WarehouseController extends Controller
     {
         self::SaveProducts();
         return redirect()->route('products.index')
-            ->with('success','Synchronizacja się powiodła');
+            ->with('success', 'Synchronizacja się powiodła');
 
     }
 

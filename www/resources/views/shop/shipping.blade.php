@@ -6,27 +6,29 @@
 @section('content')
     <main>
         <div class="container">
-          <section class="main_section">
+            <section class="main_section">
                 <h3 class="page_header">Koszty dostawy</h3>
                 <table class="table table-bordered text-center custom_table">
-                  <thead>
+                    <thead>
                     <tr>
-                      <th scope="col">Forma dostawy</th>
-                      <th scope="col">Przedpłata</th>
-                      <th scope="col">Pobranie</th>
-                      <th scope="col">Czas dostawy</th>
+                        <th scope="col">Forma dostawy</th>
+                        <th scope="col">Przedpłata</th>
+                        <th scope="col">Pobranie</th>
+                        <th scope="col">Czas dostawy</th>
                     </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td scope="row">forma</td>
-                      <td>12.99zł</td>
-                      <td>12.99zł</td>
-                      <td>1-2 dni robocze</td>
-                    </tr>
-                  </tbody>
+                    </thead>
+                    <tbody>
+                        @foreach($delivery as $data)
+                                <tr>
+                                    <td scope="row">{{$data->type}}</td>
+                                    <td>{{ number_format($data->prepayment ,2)}} zł</td>
+                                    <td>{{ number_format($data->charging ,2)}} zł</td>
+                                    <td>od 1 dnia do {{ $data->delivery_time }} dni</td>
+                                </tr>
+                        @endforeach
+                    </tbody>
                 </table>
-          </section>
+            </section>
         </div>
     </main>
 @section('footer')

@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers\Shop;
 
+use App\Http\Controllers\Warehouse\WarehouseController;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use  App\Http\Controllers\Controller;
+use App\Http\Controllers\Shop\ShopController;
+use Session;
 
 class CartController extends Controller
 {
     public function index()
     {
         $products = Product::all();
-
         return view('products', compact('products'));
     }
 
@@ -19,21 +21,29 @@ class CartController extends Controller
     {
         return view('shop.cart');
     }
-    public function addToCart($id)
+
+    protected function checkCart(int $id)
+    {
+        $shop = new ShopController();
+        $quantity = $shop->GetQuantity($id);
+        $cart = session()->get('cart');
+        if ($cart[$id]['quantity'] > $quantity) {
+            $cart[$id]['quantity'] = 1;
+        } else {
+            return view('shop.cart');
+        }
+    }
+
+    public function addToCart(int $id)
     {
         $product = Product::find($id);
-
-        if(!$product) {
+        if (!$product) {
 
             abort(404);
 
         }
-
         $cart = session()->get('cart');
-
-        // if cart is empty then this the first product
-        if(!$cart) {
-
+        if (!$cart) {
             $cart = [
                 $id => [
                     "name" => $product->name,
@@ -42,29 +52,19 @@ class CartController extends Controller
                     "photo" => $product->photo
                 ]
             ];
-
             session()->put('cart', $cart);
-
-
-
-            return redirect()->back()->with('success', 'Product added to cart successfully!');
+            self::checkCart($id);
+            return view('shop.cart');
         }
-
-        // if cart not empty then check if this product exist then increment quantity
-        if(isset($cart[$id])) {
+        if (isset($cart[$id])) {
 
             $cart[$id]['quantity']++;
 
             session()->put('cart', $cart);
-
-
-
-
-            return redirect()->back()->with('success', 'Product added to cart successfully!');
-
+            self::checkCart($id);
+            return redirect()->back()->with('success', 'Produkt został dodany do koszyka');
         }
 
-        // if item not exist in cart then add to cart with quantity = 1
         $cart[$id] = [
             "name" => $product->name,
             "quantity" => 1,
@@ -73,18 +73,14 @@ class CartController extends Controller
         ];
 
         session()->put('cart', $cart);
-
-
-
-        return redirect()->back()->with('success', 'Product added to cart successfully!');
+        self::checkCart($id);
+        return redirect()->back()->with('success', 'Produkt został dodany do koszyka');
     }
 
     public function update(Request $request)
     {
-        if($request->id and $request->quantity)
-        {
+        if ($request->id and $request->quantity) {
             $cart = session()->get('cart');
-
             $cart[$request->id]["quantity"] = $request->quantity;
 
             session()->put('cart', $cart);
@@ -92,30 +88,26 @@ class CartController extends Controller
             $subTotal = $cart[$request->id]['quantity'] * $cart[$request->id]['price'];
 
             $total = $this->getCartTotal();
-
-
-
-            session()->flash('success', 'Cart updated successfully');
+            return view('shop.cart');
         }
     }
 
-    public function remove(Request $request)
+    public function remove(int $id)
     {
-        if($request->id) {
 
-            $cart = session()->get('cart');
+        $products = Product::all();
 
-            if(isset($cart[$request->id])) {
+        $cart = session()->get('cart');
 
-                unset($cart[$request->id]);
+        if (isset($cart[$id])) {
 
-                session()->put('cart', $cart);
-            }
+            unset($cart[$id]);
+
+            Session::put('cart', $cart);
+
 
             $total = $this->getCartTotal();
-
-
-            session()->flash('success', 'Product removed successfully');
+            return redirect()->back()->with('success', 'Produkt został usunięty');
         }
     }
 
@@ -132,10 +124,9 @@ class CartController extends Controller
 
         $cart = session()->get('cart');
 
-        foreach($cart as $id => $details) {
+        foreach ($cart as $id => $details) {
             $total += $details['price'] * $details['quantity'];
         }
-
         return number_format($total, 2);
     }
 }

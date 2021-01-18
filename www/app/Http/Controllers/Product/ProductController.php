@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Product;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use  App\Http\Controllers\Controller;
+use DB;
 
 class ProductController extends Controller
 {
@@ -39,7 +40,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('products.create');
+        $category = DB::table('product_categories')->get()->toArray();
+        return view('products.create')->with('category', $category);;
     }
 
     /**
@@ -52,10 +54,19 @@ class ProductController extends Controller
     {
         request()->validate([
             'name' => 'required',
-            'detail' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'categories' => 'required',
         ]);
+        //logika pod obrazki do produktów
+        DB::table('products')->insert([
+            'name' => $request->name,
+            'description' => $request->description,
+            'price' =>  $request->price,
+            'id_categories' =>  $request->categories,
+            'image' =>  $request->image,
 
-        Product::create($request->all());
+        ]);
 
         return redirect()->route('products.index')
             ->with('success','Produkt został stworzony');
@@ -94,11 +105,10 @@ class ProductController extends Controller
     {
         request()->validate([
             'name' => 'required',
-            'detail' => 'required',
+            'description' => 'required',
         ]);
 
         $product->update($request->all());
-
         return redirect()->route('products.index')
             ->with('success','Produkt został zaktualizowany');
     }
@@ -112,7 +122,6 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
-
         return redirect()->route('products.index')
             ->with('success','Produkt został usunięty');
     }

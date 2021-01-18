@@ -37,7 +37,7 @@ class HomeController extends Controller
     {
         if(Auth::user()->verified == true)
         {
-            return view('auth.verify');
+            return view('user.profile');
         }
         else
         {

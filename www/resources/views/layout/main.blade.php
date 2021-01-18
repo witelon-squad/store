@@ -63,9 +63,10 @@
                 </ul>
 
             </div>
-            <form class="order-lg-1 d-flex nav_search">
-                <input class="form-control nav_input_search" type="search" placeholder="Szukaj" aria-label="Search">
+            <form class="order-lg-1 d-flex nav_search" action="{{ url('/shop/products/search/') }}" method="post">
+                <input class="form-control nav_input_search" type="search" placeholder="Szukaj" aria-label="Search" name="Search">
                 <button class="btn btn-main btn-nav" type="submit">Szukaj</button>
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
             </form>
         </div>
 
@@ -79,7 +80,7 @@
                         <a class="nav-link" href="{{ route('products') }}">Sklep</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('products.index') }}">O nas</a>
+                        <a class="nav-link" href="{{route('about') }}">O nas</a>
                     </li>
                 </ul>
             </div>
@@ -103,7 +104,7 @@
                 <a href="{{ route('InfoShipping') }}" class="footer_link">Koszty dostawy</a>
             </div>
             <div class="footer_item">
-                <a href="{{ route('index') }}" class="footer_link">Zwroty i reklamacje</a>
+                <a href="{{ route('refunds') }}" class="footer_link">Zwroty i reklamacje</a>
             </div>
             <div class="footer_item">
                 <a href="{{ route('policy') }}" class="footer_link">Polityka prywatności</a>
